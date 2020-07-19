@@ -38,14 +38,18 @@ function checkEmail(){
 
 
 function checkPassword(){
-	isPass=true;
-	sessionStorage.setItem("pass", isPass);
+	
+
 	let userPassword = document.querySelector('input').value;
 
 	if(userEmail == "abc@gmail.com" && userPassword == "abc" ){
+		isPass=true;
+		sessionStorage.setItem("pass", isPass);
 		openWindow();
 
 	}else if(userEmail == "noreen@gmail.com" && userPassword == "noreen" ){
+		isPass=true;
+		sessionStorage.setItem("pass", isPass);
 		openWindow();
 	
 	}else{
@@ -54,6 +58,7 @@ function checkPassword(){
 	}
 	
 }
+
 function openWindow(){
 	login = document.querySelector("#password");
 	login.innerHTML = window.open('welcome.html');
