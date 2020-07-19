@@ -53,16 +53,6 @@ function checkPassword(){
 		document.getElementById('invalid-msg').style.display = "block";
 	}
 	
-	// let isPasswordMatch = (userPassword == password1) || (userPassword == password2);
-	// if(isPasswordMatch == true){
-	// 	let login = document.querySelector("#password");
-	// 	login.innerHTML = window.open('welcome.html');
-	// }else{
-	// 	alert("wrong Password");
-	// 	invalidMsg.innerHTML = "Wrong password. Try again or click Forget Password to reset it.";
-	// 	// document.getElementById('email').style.bordercolor="red";
-	// }
-	
 }
 function openWindow(){
 	login = document.querySelector("#password");
