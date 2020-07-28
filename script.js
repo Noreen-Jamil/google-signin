@@ -31,7 +31,7 @@ function checkEmail(){
 		loginEmail.innerHTML = window.close('index.html');
 	}else{
 		document.getElementById('invalid-email').style.display = "block";
-		document.getElementById('email').style.bordercolor = "red";
+		document.getElementById('email').style.borderColor = "red";
 	}
 	
 }
@@ -55,6 +55,7 @@ function checkPassword(){
 	}else{
 		alert("incorrect password");
 		document.getElementById('invalid-msg').style.display = "block";
+		document.querySelector('input').style.borderColor = "red";
 	}
 	
 }
