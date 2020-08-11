@@ -26,12 +26,10 @@ function checkEmail(){
 
 		localStorage.setItem("userEmail", userEmail);
 		sessionStorage.setItem("user", user);
-		let loginEmail = document.querySelector("#login");
-		loginEmail.innerHTML = window.open('confirm-password.html');
-		loginEmail.innerHTML = window.close('index.html');
+		window.location.href = "confirm-password.html";
 	}else{
 		document.getElementById('invalid-email').style.display = "block";
-		document.getElementById('email').style.borderColor = "red";
+		document.getElementById('email').style.border = "2px solid red";
 	}
 	
 }
@@ -45,27 +43,21 @@ function checkPassword(){
 	if(userEmail == "abc@gmail.com" && userPassword == "abc" ){
 		isPass=true;
 		sessionStorage.setItem("pass", isPass);
-		openWindow();
+		window.location.href = "welcome.html";
 
 	}else if(userEmail == "noreen@gmail.com" && userPassword == "noreen" ){
 		isPass=true;
 		sessionStorage.setItem("pass", isPass);
-		openWindow();
+		window.location.href = "welcome.html";
 	
 	}else{
 		alert("incorrect password");
 		document.getElementById('invalid-msg').style.display = "block";
-		document.querySelector('input').style.borderColor = "red";
+		document.querySelector('input').style.border = "2px solid red";
 	}
 	
 }
 
-function openWindow(){
-	login = document.querySelector("#password");
-	login.innerHTML = window.open('welcome.html');
-	login.innerHTML = window.close('confirm-password.html');
-	
-}
 
 if(sessionStorage.getItem("pass") == "true"){
 	userName = sessionStorage.getItem("user");
