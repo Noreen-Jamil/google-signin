@@ -1,77 +1,93 @@
-const user1 = "noreen@gmail.com";
-const user2 = "abc@gmail.com";
-const password1 = "noreen";
-const password2 = "abc";
-var userEmail;
-let showEmailSpan;
-let invalidEmailMsg;
-let login;
-let userName;
-let showName;
-let user;
-let isPass=false;
+
+let userEmailInput;
+const users = [
+	{
+		user: "xyz@gmail.com",
+		password: "xyz",
+		userName : "Mr.Xyz"
+	},
+	{
+		user: "abc@gmail.com",
+		password : "abc",
+		userName : "Mr. Abc "
+	},
+	{
+		user: "noreen@gmail.com",
+		password : "noreen",
+		userName : "Noreen Jamil"
+	}
+];
+let isEmailExist;
+
 
 function checkEmail(){
 
-	userEmail = document.querySelector('input').value;
+	userEmailInput = document.querySelector('input').value;
 
-	let isEmailExist = (userEmail == user1) || (userEmail == user2);
-
-	if(isEmailExist == true){
-		if(userEmail == user1){
-			user = "noreen";
-		}else{
-			user = "abc";
+	console.log(`email ${userEmailInput}`);
+	
+	users.find( (user,index) => {
+		
+		if(user.user == userEmailInput){ 
+			isEmailExist = true;
+			userDetail = {
+				userEmail: user.user,
+				userName: user.userName,
+				userPassword:user.password,
+				nextPage : "password"
+			};
+			localStorage.setItem("user", JSON.stringify(userDetail));
+			
 		}
-
-		localStorage.setItem("userEmail", userEmail);
-		sessionStorage.setItem("user", user);
+	});
+	if(isEmailExist == true){
 		window.location.href = "confirm-password.html";
 	}else{
 		document.getElementById('invalid-email').style.display = "block";
 		document.getElementById('email').style.border = "2px solid red";
 	}
 	
+	console.log(`is email Exist ${isEmailExist}`);
+
 }
 
+let userDetail = JSON.parse(localStorage.getItem("user"));
 
 function checkPassword(){
 	
-
 	let userPassword = document.querySelector('input').value;
-
-	if(userEmail == "abc@gmail.com" && userPassword == "abc" ){
-		isPass=true;
-		sessionStorage.setItem("pass", isPass);
-		window.location.href = "welcome.html";
-
-	}else if(userEmail == "noreen@gmail.com" && userPassword == "noreen" ){
-		isPass=true;
-		sessionStorage.setItem("pass", isPass);
-		window.location.href = "welcome.html";
 	
+	console.log(userDetail);
+	if(userDetail.userPassword  == userPassword){
+		window.location.href = "welcome.html";
+		userDetail.nextPage = "welcome";
+		localStorage.setItem("user", JSON.stringify(userDetail));
+
 	}else{
-		alert("incorrect password");
 		document.getElementById('invalid-msg').style.display = "block";
-		document.querySelector('input').style.border = "2px solid red";
+		document.querySelector('input').style.borderColor = "red";
 	}
 	
 }
 
 
-if(sessionStorage.getItem("pass") == "true"){
-	userName = sessionStorage.getItem("user");
-	showName= document.getElementById('welcome-name');
-	window.onload = (showName.innerHTML = userName);
-	
+console.log(userDetail.nextPage);
 
-}else{
 
-	userEmail = localStorage.getItem("userEmail");//to use variable from one webpage to another
+
+ if(userDetail.nextPage == "password" || userDetail.nextPage == "backToPassword"){
+
+	userEmail = userDetail.userEmail;
 	showEmailSpan = document.getElementById('email');
 	window.onload= (showEmailSpan.innerHTML = userEmail);
 }
-
+else if(userDetail.nextPage == "welcome"){
+	userName = userDetail.userName;
+	showName= document.getElementById('welcome-name');
+	window.onload = (showName.innerHTML = userName);
+	userDetail.nextPage = "backToPassword";
+	localStorage.setItem("user", JSON.stringify(userDetail));
+}
 
 
 
